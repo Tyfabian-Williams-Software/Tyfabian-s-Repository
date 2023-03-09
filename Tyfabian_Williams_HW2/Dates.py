@@ -18,13 +18,16 @@ months_dict = {
     'November': '11',
     'December': '12',
 }
-#modify to accept files
+#modify to accept files and include an output file to write to
 
 
 today = date.today().strftime('%#m/%#d/%Y')
 token1 = today.split('/')
-
+output_file = input()
 input_file = input()
+
+ofile = open(output_file, 'w')
+
 with open(input_file, 'r') as file:
     for user_date in file:
         user_date = user_date.strip()
@@ -40,7 +43,7 @@ with open(input_file, 'r') as file:
         day = user_date[month_index + 1:][:-day_index]
         year = user_date[-4:]
         month_num = months_dict[month]
-        new_date = month_num + '/' + day + '/' + year
+        new_date = month_num + '/' + day + '/' + year + '\n'
         token2 = new_date.split('/')
         if (token1[0] >= token2[0] or token1[1] >= token2[1]) and token1[2] >= token2[2]:
-            print(new_date)
+            ofile.write(new_date)
